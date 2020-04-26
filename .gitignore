@@ -1,0 +1,5 @@
+*.zip
+*.jar
+containerized-minecraft/Minecraft_Server/*
+containerized-minecraft/resources/world/*
+sshServer.sh
