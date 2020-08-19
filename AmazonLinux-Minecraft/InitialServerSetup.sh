@@ -14,9 +14,9 @@ sudo systemctl start amazon-ssm-agent
 #Setup Dir structure
 sudo mkdir /logs -p
 sudo mkdir /scripts -p
+sudo mkdir /backups -p
 sudo chgrp ec2-user -R /logs/ /scripts/ /backups/
 sudo chmod 770 -R /logs/ /scripts/ /backups/
-sudo chmod +r -R /Minecraft_Server/
 
 #Start Crontab
 sudo systemctl start crond
@@ -34,8 +34,11 @@ rm CloudWatchMonitoringScripts-1.2.2.zip
 mv aws-scripts-mon /scripts/
 echo "*/5 * * * * ec2-user /scripts/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --disk-space-util --disk-path=/ --from-cron" | sudo tee -a /etc/crontab
 
-#Downlaoad Minecraft server from S3
-sudo aws s3 cp s3://1-minecraft-server-personal/Minecraft_Server/ /Minecraft_Server
+#Downlaoad Minecraft server from S3 and set permissions
+#sudo aws s3 cp s3://1-minecraft-server-personal/Minecraft_Server/ /Minecraft_Server
+#sudo chmod +r -R /Minecraft_Server/
+
+#Fresh install of Minecraft
 
 #Startup Minecraft server
 tmux new-session -d -s Minecraft

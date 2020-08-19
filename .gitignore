@@ -1,5 +1,6 @@
 *.zip
 *.jar
-containerized-minecraft/Minecraft_Server/*
-containerized-minecraft/resources/world/*
+*/containerized-minecraft/Minecraft_Server/*
+*/containerized-minecraft/resources/world/*
 sshServer.sh
+*.aws-sam/
