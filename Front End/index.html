@@ -23,9 +23,10 @@
 	<link rel="stylesheet" href="css/dismissible.css" />
 	<link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet" />
 	<script type="text/javascript" src="js/start_button_api.js"></script>
+
+
 </head>
 <body>
-
 	<div class="container">
 		<div class="logo">
 			<!-- In the img folder, upload your logo -->
@@ -33,14 +34,25 @@
 			<img src="img/Logo4.png" alt="MyServer logo">
 		</div>
 		<div id="dismissible-container"></div>
-		<div class="items">
+		
+	<div class="items">
+
+		<script>
+
+			function serverStart() {
+			fetch('https://ktfk8riir9.execute-api.us-east-1.amazonaws.com/Prod/start')
+				.then(response => {
+				return response.json()
+			  })
+				.then(data => {
+					console.log(data)
+				})
+			}
+		</script>
 
 			
-			<button onclick='updateVisitCount()', button class="big-button">Start</button>
+			<button onclick='serverStart()', button class="big-button">Start</button>
 			
-			
-			
-			<button id="btn">Call the function</button>
 
 
 		</div>
@@ -50,7 +62,7 @@
 			<!-- Replace play.myserver.net with your IP address -->
 			<!-- Do it for both examples below -->
 			<!-- Please set both your IP and port -->
-			<p>Join <span class="sip" data-ip="x" data-port="y">
+			<p>Join <span class="sip" data-ip="ec2-18-209-223-175.compute-1.amazonaws.com" data-port="22">
 			0</span> other players on <span class="ip">play.cubecraft.net</span></p>
 		</div>
 	</div>
@@ -59,7 +71,7 @@
 		  const dismissible = new Dismissible(document.querySelector('#dismissible-container'));
 	
 		  document.querySelector('.big-button').addEventListener('click', () => dismissible.success(
-			'Server Started!'));
+			'Server is Starting!'));
 		};
 	  </script>
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
