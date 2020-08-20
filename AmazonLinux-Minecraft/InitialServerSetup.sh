@@ -55,3 +55,6 @@ mkdir /backups/longTerm -p
 
 echo "*/30 * * * * ec2-user /scripts/backup-script.sh shortTerm >> /logs/backups-shortTerm.log" | sudo tee -a /etc/crontab
 echo "0 0 * *	* ec2-user /scripts/backup-script.sh longTerm >> /logs/backups-longTerm.log" | sudo tee -a /etc/crontab
+
+#Stop server every 5 mins
+#echo "*/2 * * * * ec2-user shutdown now" | sudo tee -a /etc/crontab
