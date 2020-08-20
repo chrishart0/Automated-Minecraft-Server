@@ -1,6 +1,7 @@
 import json
+import boto3
 
-# import requests
+client = boto3.client('ec2')
 
 
 def lambda_handler(event, context):
@@ -25,18 +26,22 @@ def lambda_handler(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
+    print(event)
 
-    #     raise e
+    #ToDo: Get Instance ID from somewhere, maybe CF or maybe ASG
+    instanceID="i-0eadf8415c843e62a"
+
+    response = client.start_instances(
+            InstanceIds=[
+                instanceID,
+            ],
+            #AdditionalInfo='string',
+            DryRun=False
+        )
 
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
+            "message": response
         }),
     }

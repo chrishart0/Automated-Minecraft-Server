@@ -23,6 +23,13 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+      Policies:
+        - Version: '2012-10-17' # Policy Document
+          Statement:
+            - Effect: Allow
+              Action:
+                - ec2:StartInstances
+              Resource: '*'
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
