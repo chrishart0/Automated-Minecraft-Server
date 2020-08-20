@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 function updateVisitCount() {
-    fetch('https://0tgloih8p9.execute-api.us-east-1.amazonaws.com/Prod/hello')
+    fetch('https://ktfk8riir9.execute-api.us-east-1.amazonaws.com/Prod/start')
         .then(response => {
             return response.json()
         })
