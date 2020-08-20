@@ -52,7 +52,7 @@ $(document).ready(()=>{
     if (result.online) {
       $(".sip").html(result.players.now);
     } else {
-      $(".playercount").html("Server isn't online!");
+      $(".playercount").html("Server is Down, We Need Lift Off!");
     }
   });
 
@@ -61,7 +61,7 @@ $(document).ready(()=>{
       if (result.online) {
         $(".sip").html(result.players.now);
       } else {
-        $(".playercount").html("Server isn't online!");
+        $(".playercount").html("Server is Down, We Need Lift Off!");
       }
     });
   }, 3000);
