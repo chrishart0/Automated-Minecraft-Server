@@ -4,3 +4,4 @@
 */containerized-minecraft/resources/world/*
 sshServer.sh
 *.aws-sam/
+samconfig.toml

@@ -26,11 +26,6 @@ def lambda_handler(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    #print(event)
-
-    data = {}
-    data['status'] = 'value'
-
     #ToDo: Get Instance ID from somewhere, maybe CF or maybe ASG
     instanceID="i-0eadf8415c843e62a"
 
@@ -40,13 +35,6 @@ def lambda_handler(event, context):
         ]
     )
     status = statusReturn['Reservations'][0]['Instances'][0]['State']['Name']
-    #print(status)
-
-    # response = client.start_instances(
-    #         InstanceIds=[
-    #             instanceID,
-    #         ]
-    #     )
 
     return {
         "statusCode": 200,
@@ -54,5 +42,3 @@ def lambda_handler(event, context):
             "message": status
         }),
     }
-
-lambda_handler(1,2)
