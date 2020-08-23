@@ -1,0 +1,83 @@
+<!-- Proudly coded by Billy (https://bybilly.uk) -->
+<!-- Version: 1.9 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Info meta tags, important for social media + SEO -->
+	<title>MyServer - Official Website</title>
+	<meta name="description" content="MyServer is a new and awesome Minecraft server. You can join with the IP 'play.myserver.net'.">
+	<meta property="og:title" content="MyServer - Official Website Portal">
+	<meta property="og:site_name" content="MyServer">
+	<meta property="og:description" content="MyServer is a new and awesome Minecraft server. You can join with the IP 'play.myserver.net'.">
+	<meta property="og:image" content="https://bybilly.uk/portal/img/minecraft.jpg">
+	<meta property="og:url" content="https://bybilly.uk/">
+	<meta name="twitter:card" content="summary_large_image">
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/stylesheet.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="onoffswitch.css">
+	<link rel="stylesheet" href="css/dismissible.css" />
+	<link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet" />
+	<script type="text/javascript" src="js/start_button_api.js"></script>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="logo">
+			<!-- In the img folder, upload your logo -->
+			<!-- Make sure you name it 'logo.png' -->
+			<img src="img/Logo4.png" alt="MyServer logo">
+		</div>
+		<div id="dismissible-container"></div>
+		
+	<div class="items">
+
+		<script>
+
+			function serverStart() {
+			fetch('https://ktfk8riir9.execute-api.us-east-1.amazonaws.com/Prod/start')
+				.then(response => {
+				return response.json()
+			  })
+				.then(data => {
+					console.log(data)
+				})
+			}
+		</script>
+
+			
+			<button onclick='serverStart()', button class="big-button">Start</button>
+			
+
+
+		</div>
+	
+
+		<div class="playercount">
+			<!-- Replace play.myserver.net with your IP address -->
+			<!-- Do it for both examples below -->
+			<!-- Please set both your IP and port -->
+			<p>Join <span class="sip" data-ip="ec2-18-209-223-175.compute-1.amazonaws.com" data-port="22">
+			0</span> other players on <span class="ip">play.cubecraft.net</span></p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		window.onload = function () {
+		  const dismissible = new Dismissible(document.querySelector('#dismissible-container'));
+	
+		  document.querySelector('.big-button').addEventListener('click', () => dismissible.success(
+			'Server is Starting!'));
+		};
+	  </script>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<script src="js/firefly.js" type="text/javascript"></script>
+	<script src="js/main.js" type="text/javascript"></script>
+	<script src="js/dismissible.js"></script>
+	<script src="js/start_button_api.js"></script>
+</body>
+</html>

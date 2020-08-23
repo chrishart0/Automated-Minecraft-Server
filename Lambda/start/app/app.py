@@ -34,24 +34,16 @@ def lambda_handler(event, context):
     #ToDo: Get Instance ID from somewhere, maybe CF or maybe ASG
     instanceID="i-0eadf8415c843e62a"
 
-    statusReturn = client.describe_instances(
-        InstanceIds=[
-            instanceID
-        ]
-    )
-    status = statusReturn['Reservations'][0]['Instances'][0]['State']['Name']
-    #print(status)
-
-    # response = client.start_instances(
-    #         InstanceIds=[
-    #             instanceID,
-    #         ]
-    #     )
+    response = client.start_instances(
+            InstanceIds=[
+                instanceID,
+            ]
+        )
 
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": status
+            "message": response
         }),
     }
 
