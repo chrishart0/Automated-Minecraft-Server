@@ -48,8 +48,6 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Headers': 'Authorization'
             },
         "body": json.dumps({
-            "message": status
+            "message": response
         }),
     }
-
-lambda_handler(1,2)
