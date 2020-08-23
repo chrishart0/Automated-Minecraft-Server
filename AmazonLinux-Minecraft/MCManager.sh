@@ -1,4 +1,4 @@
-#/bin/bash
+#/bin/bash 
 shortTermBackupsToKeep=3
 longTermBackupsToKeep=5
 localShortTermLocation="/backups/shortTerm"
