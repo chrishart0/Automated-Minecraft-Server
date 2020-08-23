@@ -1,5 +1,4 @@
-name: ccmc-ui
-
+name: FrontEnd-Deploy
 on:
   push:
     branches:

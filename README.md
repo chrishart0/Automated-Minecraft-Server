@@ -3,4 +3,4 @@ The intent of this project is to write a fully automated MineCraft server deploy
 
 
 # Status
-![FrontEnd Deploy](https://github.com/ChristianHart/Automated-Minecraft-Server/workflows/ccmc-ui/badge.svg)
+![FrontEnd-Deploy](https://github.com/ChristianHart/Automated-Minecraft-Server/workflows/FrontEnd-Deploy/badge.svg)
