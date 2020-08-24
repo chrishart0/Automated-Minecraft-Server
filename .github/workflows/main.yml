@@ -1,4 +1,4 @@
-name: FrontEnd-Deploy
+name: CloudCraft Build + Deploy
 on:
   push:
     branches:
@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: sam build
-        uses: youyo/aws-sam-action/python3.8@master
+        uses: ChristianHart/aws-sam-action/python3.8@master
         with:
           sam_command: build
         env:
