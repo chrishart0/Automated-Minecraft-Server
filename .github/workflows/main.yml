@@ -37,7 +37,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEPLOY_REGION }}
 
       - name: sam deploy
-        uses: ChristianHart/aws-sam-action/python3.8@master
+        uses: ChristianHart/aws-sam-action@master
         with:
           sam_command: 'deploy --no-fail-on-empty-changeset'
           working_dir: Lambda/start
