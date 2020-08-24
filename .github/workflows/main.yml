@@ -39,7 +39,7 @@ jobs:
       - name: sam deploy
         uses: ChristianHart/aws-sam-action@master
         with:
-          sam_command: 'deploy --no-fail-on-empty-changeset'
+          sam_command: 'deploy --no-fail-on-empty-changeset --stack-name CCMC-API-Start'
           working_dir: Lambda/start
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
