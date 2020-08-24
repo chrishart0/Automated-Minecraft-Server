@@ -1,4 +1,4 @@
-name: FrontEnd-Deploy
+name: CloudCraft Build + Deploy
 on:
   push:
     branches:
@@ -27,19 +27,19 @@ jobs:
         uses: actions/checkout@master
 
       - name: sam build
-        uses: youyo/aws-sam-action/python3.8@master
+        uses: ChristianHart/aws-sam-action@master
         with:
-          sam_command: build
+          sam_command: build --template-file Lambda/start
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEPLOY_REGION }}
-          SOURCE_DIR: Lambda/start
 
       - name: sam deploy
-        uses: youyo/aws-sam-action/python3.8@master
+        uses: ChristianHart/aws-sam-action@master
         with:
-          sam_command: 'deploy --no-fail-on-empty-changeset'
+          sam_command: "deploy --no-fail-on-empty-changeset --template-file Lambda/start --stack-name CCMC-API-Start --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-179h0fq7xrftd --capabilities CAPABILITY_IAM --region ${{ secrets.AWS_DEPLOY_REGION }}""
+          working_dir: Lambda/start
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
