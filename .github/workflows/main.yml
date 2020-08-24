@@ -5,7 +5,7 @@ on:
     - master
 
 jobs:
-  deploy:
+  FrontEnd-UI-Deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -16,5 +16,31 @@ jobs:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
+        AWS_REGION: ${{ secrets.AWS_DEPLOY_REGION }}
         SOURCE_DIR: 'FrontEnd'      # optional: defaults to entire repository:  
+
+  SAM-API-Start:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: sam build
+        uses: youyo/aws-sam-action/python3.8@master
+        with:
+          sam_command: build
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEPLOY_REGION }}
+          SOURCE_DIR: Lambda/start
+
+      - name: sam deploy
+        uses: youyo/aws-sam-action/python3.8@master
+        with:
+          sam_command: 'deploy --no-fail-on-empty-changeset'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEPLOY_REGION }}
