@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: sam build
-        uses: ChristianHart/aws-sam-action/python3.8@master
+        uses: ChristianHart/aws-sam-action@master
         with:
           sam_command: build
           working_dir: Lambda/start
