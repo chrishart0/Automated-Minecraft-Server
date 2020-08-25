@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  status-api
+  Start-api
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -14,14 +14,15 @@ Globals:
     Timeout: 10
 
 Resources:
-  StatusFunction:
+  StartFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: app/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Role: !GetAtt LambdaExecutorRole.Arn
       Events:
-        status:
+        Start:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /start
@@ -34,16 +35,48 @@ Resources:
                 - ec2:StartInstances
               Resource: '*' #ToDo limit perms down
 
+  LambdaExecutorRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: EC2-Start
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'ec2:StartInstances'
+                Resource: '*'
+        - PolicyName: Lambda-Logging
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Resource: 
+                  - '*'
+
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  StatusFunctionAPI:
+  StartFunctionAPI:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/start"
-  StatusFunction:
+  StartFunction:
     Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt StatusFunction.Arn
-  StatusFunctionIamRole:
+    Value: !GetAtt StartFunction.Arn
+  LambdaExecutorRole:
     Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt StatusFunctionRole.Arn
+    Value: !GetAtt LambdaExecutorRole.Arn
