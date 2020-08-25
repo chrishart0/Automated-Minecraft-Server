@@ -38,7 +38,7 @@ jobs:
       - name: sam deploy
         uses: ChristianHart/aws-sam-action@master
         with:
-          sam_command: "deploy --no-fail-on-empty-changeset --template-file Lambda/start/template.yaml --stack-name CCMC-API-Start --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-179h0fq7xrftd --capabilities CAPABILITY_IAM --region ${{ secrets.AWS_DEPLOY_REGION }}""
+          sam_command: deploy --no-fail-on-empty-changeset --template-file Lambda/start/template.yaml --stack-name CCMC-API-Start --s3-bucket aws-sam-cli-managed-default-samclisourcebucket-179h0fq7xrftd --capabilities CAPABILITY_IAM --region ${{ secrets.AWS_DEPLOY_REGION }}
           working_dir: Lambda/start
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

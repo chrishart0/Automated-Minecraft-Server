@@ -25,6 +25,13 @@
       this._container.appendChild(dismissible);
     }
 
+    show3(level, message, icon) {
+      this.dismiss();
+
+      const dismissible = this._createDismissible(level, message, icon);
+      this._container.appendChild(dismissible);
+    }
+
     dismiss() {
       while (this._container.firstChild) {
         this._container.firstChild.remove();
@@ -36,7 +43,7 @@
     }
 
     info(message) {
-      this.show('info', message, this._config.icons.info);
+      this.show3('info', message, this._config.icons.info);
     }
 
     success(message) {
@@ -85,8 +92,25 @@
       element.classList.add(...icon, 'dismissible-icon');
       return element;
     }
+    
   }
 
   window.Dismissible = Dismissible;
 
 })(window);
+
+const countEl = document.getElementById('x');
+
+updateVisitCount();
+//Testinglllll
+function updateVisitCount() {
+    fetch('https://0tgloih8p9.execute-api.us-east-1.amazonaws.com/Prod/status')
+        .then(response => {
+        return response.json()
+      })
+        .then(data => {
+            console.log(data)
+            console.log(data['message'])
+            document.getElementById('count').innerHTML = data['message'];
+        })
+    }
